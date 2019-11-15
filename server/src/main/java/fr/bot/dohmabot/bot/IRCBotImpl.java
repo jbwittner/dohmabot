@@ -10,6 +10,8 @@ import java.io.IOException;
 @Service
 public class IRCBotImpl extends PircBot implements IRCBot {
 
+    private String uri;
+
     public IRCBotImpl(){
         System.out.println("impl");
         this.setName("Dohmabot");

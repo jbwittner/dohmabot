@@ -25,6 +25,7 @@ public class ConfigurationController {
     @RequestMapping("/joinChannel")
     public void joinChannel(String channel){
         channel = "#" + channel;
+        System.out.println("connect");
         this.ircBot.joinIRCChannel(channel);
     }
 
