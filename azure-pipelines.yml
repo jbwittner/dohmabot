@@ -1,0 +1,53 @@
+# Maven
+# Build your Java project and run tests with Apache Maven.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/java
+
+pr:
+- master
+- develop
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: DownloadSecureFile@1
+  name: settingsxml
+  displayName: 'Download settings.xml'
+  inputs:
+    secureFile: 'settings.xml'
+
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      New-Item -Type Directory -Force "${HOME}/.m2"
+      Copy-Item -Force "$(settingsxml.secureFilePath)" "${HOME}/.m2/settings.xml"
+      Get-ChildItem -Path "${HOME}"
+      Get-ChildItem -Path "${HOME}/.m2"
+
+- task: Maven@3
+  inputs:
+    mavenPomFile: 'pom.xml'
+    goals: 'dependency:resolve'
+    publishJUnitResults: false
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.11'
+    mavenVersionOption: 'Default'
+    mavenAuthenticateFeed: false
+    effectivePomSkip: false
+    sonarQubeRunAnalysis: false
+
+- task: Maven@3
+  inputs:
+    mavenPomFile: 'pom.xml'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.11'
+    mavenVersionOption: 'Default'
+    mavenAuthenticateFeed: false
+    effectivePomSkip: false
+    sonarQubeRunAnalysis: false
+    checkStyleRunAnalysis: true
+    pmdRunAnalysis: true
