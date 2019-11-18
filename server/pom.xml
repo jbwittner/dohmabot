@@ -6,7 +6,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>fr.bot.dohmabot</artifactId>
+        <artifactId>dohmabot</artifactId>
         <groupId>fr.bot</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
