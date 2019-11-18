@@ -16,21 +16,22 @@ public class ConfigurationController {
     private IRCBot ircBot;
 
     @RequestMapping("/connect")
-    public boolean connect(String uri, Integer port, String token) throws IOException, IrcException, NickAlreadyInUseException {
+    public boolean connect(final String uri, final Integer port, final String token)
+            throws IOException, IrcException, NickAlreadyInUseException {
         boolean isConnected;
         isConnected = this.ircBot.toConnect(uri, port, token);
         return isConnected;
     }
 
     @RequestMapping("/joinChannel")
-    public void joinChannel(String channel){
-        String channelToConnect = "#" + channel;
+    public void joinChannel(final String channel){
+        final String channelToConnect = "#" + channel;
         this.ircBot.joinIRCChannel(channelToConnect);
     }
 
     @RequestMapping("/sendMessage")
-    public void sendMessage(String channel, String message){
-        String channelToSendMessage = "#" + channel;
+    public void sendMessage(final String channel, final String message){
+        final String channelToSendMessage = "#" + channel;
         this.ircBot.sendIRCMessage(channelToSendMessage, message);
     }
 }

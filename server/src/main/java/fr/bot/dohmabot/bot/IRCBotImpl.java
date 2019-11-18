@@ -11,27 +11,29 @@ import java.io.IOException;
 public class IRCBotImpl extends PircBot implements IRCBot {
     
     public IRCBotImpl(){
+        super();
         this.setName("Dohmabot");
         this.isConnected();
         this.setVerbose(true);
     }
 
-    public boolean toConnect(String uri, Integer port, String token) throws IOException, IrcException, NickAlreadyInUseException {
+    public boolean toConnect(final String uri, final Integer port, final String token)
+            throws IOException, IrcException, NickAlreadyInUseException {
         boolean isConnected;
         this.connect(uri, port, token);
         isConnected = this.isConnected();
         return isConnected;
     }
 
-    public void joinIRCChannel(String channel){
+    public void joinIRCChannel(final String channel){
         this.joinChannel(channel);
     }
 
-    public void sendIRCMessage(String channel, String message){
+    public void sendIRCMessage(final String channel, final String message){
         this.sendMessage(channel, message);
     }
 
-    public void toDisconnect(){
+    public void disconnectToServer(){
         super.disconnect();
     }
 }

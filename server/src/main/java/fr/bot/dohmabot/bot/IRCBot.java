@@ -7,8 +7,12 @@ import java.io.IOException;
 
 public interface IRCBot {
 
-    boolean toConnect(String uri, Integer port, String token) throws IOException, IrcException, NickAlreadyInUseException;
-    void joinIRCChannel(String channel);
-    void sendIRCMessage(String channel, String message);
-    void toDisconnect();
+    boolean toConnect(final String uri, final Integer port, final String token)
+            throws IOException, IrcException, NickAlreadyInUseException;
+
+    void joinIRCChannel(final String channel);
+
+    void sendIRCMessage(final String channel, final String message);
+
+    void disconnectToServer();
 }
