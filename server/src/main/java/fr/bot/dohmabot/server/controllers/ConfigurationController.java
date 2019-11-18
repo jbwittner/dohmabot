@@ -24,13 +24,13 @@ public class ConfigurationController {
 
     @RequestMapping("/joinChannel")
     public void joinChannel(String channel){
-        channel = "#" + channel;
-        this.ircBot.joinIRCChannel(channel);
+        String channelToConnect = "#" + channel;
+        this.ircBot.joinIRCChannel(channelToConnect);
     }
 
     @RequestMapping("/sendMessage")
     public void sendMessage(String channel, String message){
-        channel = "#" + channel;
-        this.ircBot.sendIRCMessage(channel, message);
+        String channelToSendMessage = "#" + channel;
+        this.ircBot.sendIRCMessage(channelToSendMessage, message);
     }
 }
