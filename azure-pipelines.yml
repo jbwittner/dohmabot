@@ -41,7 +41,7 @@ steps:
     mavenAuthenticateFeed: false
     effectivePomSkip: false
     sonarQubeRunAnalysis: false
-    checkStyleRunAnalysis: true
+    checkStyleRunAnalysis: false
     pmdRunAnalysis: true
 
 - task: Bash@3
