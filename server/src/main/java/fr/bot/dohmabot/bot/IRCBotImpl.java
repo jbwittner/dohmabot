@@ -7,33 +7,64 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 
+/**
+ * Implementation of IRCBot.java
+ * @author Jean-Baptiste WITTNER
+ * @see fr.bot.dohmabot.bot.IRCBot
+ */
 @Service
 public class IRCBotImpl extends PircBot implements IRCBot {
 
+    /**
+     * Constructor of IRCBotImpl
+     */
     public IRCBotImpl(){
-        System.out.println("impl");
+        super();
         this.setName("Dohmabot");
         this.isConnected();
         this.setVerbose(true);
     }
 
-    public boolean toConnect(String uri, Integer port, String token) throws IOException, IrcException, NickAlreadyInUseException {
+    /**
+     * Attempt to connect to the specified IRC server using the supplied password.
+     * The onConnect method is called upon success.
+     * @param uri Address of the IRC Server
+     * @param port Port of the IRC Server
+     * @param token Token used to authenticate the bot
+     * @return true if connected, else false
+     * @throws IOException if it was not possible to connect to the server
+     * @throws IrcException if the server would not let us join it
+     * @throws NickAlreadyInUseException if our nick is already in use on the server.
+     */
+    public boolean connectToServer(final String uri, final Integer port, final String token)
+            throws IOException, IrcException, NickAlreadyInUseException {
         boolean isConnected;
-        System.out.println("connect");
         this.connect(uri, port, token);
         isConnected = this.isConnected();
         return isConnected;
     }
 
-    public void joinIRCChannel(String channel){
+    /**
+     * Joins a channel
+     * @param channel The name of the channel to join
+     */
+    public void joinIRCChannel(final String channel){
         this.joinChannel(channel);
     }
 
-    public void sendIRCMessage(String channel, String message){
+    /**
+     * Sends a message to a channel.
+     * @param channel The name of the channel to send to.
+     * @param message The message to send
+     */
+    public void sendIRCMessage(final String channel, final String message){
         this.sendMessage(channel, message);
     }
 
-    public void toDisconnect(){
+    /**
+     * This method disconnects from the server
+     */
+    public void disconnectToServer(){
         super.disconnect();
     }
 }

@@ -3,6 +3,8 @@
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
 
+trigger: none
+
 pr:
 - master
 - develop
@@ -18,6 +20,7 @@ steps:
     secureFile: 'settings.xml'
 
 - task: PowerShell@2
+  displayName: 'Configure settings.xml'
   inputs:
     targetType: 'inline'
     script: |
@@ -27,21 +30,12 @@ steps:
       Get-ChildItem -Path "${HOME}/.m2"
 
 - task: Maven@3
+  displayName: 'PMD check'
   inputs:
     mavenPomFile: 'pom.xml'
-    goals: 'dependency:resolve'
+    goals: 'pmd:pmd'
+    options: '-B -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn'
     publishJUnitResults: false
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.11'
-    mavenVersionOption: 'Default'
-    mavenAuthenticateFeed: false
-    effectivePomSkip: false
-    sonarQubeRunAnalysis: false
-
-- task: Maven@3
-  inputs:
-    mavenPomFile: 'pom.xml'
-    publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     javaHomeOption: 'JDKVersion'
     jdkVersionOption: '1.11'
@@ -51,3 +45,84 @@ steps:
     sonarQubeRunAnalysis: false
     checkStyleRunAnalysis: true
     pmdRunAnalysis: true
+
+- task: Bash@3
+  displayName: 'Checking results of PMD'
+  inputs:
+    targetType: 'inline'
+    script: |
+      FILE="server/target/site/pmd.html"
+      if [ -f "$FILE" ];
+      then
+        echo "File $FILE exist."
+        exit 1
+      else
+        echo "File $FILE does not exist"
+      fi
+    failOnStderr: true
+
+- task: Maven@3
+  displayName: 'Maven validate'
+  inputs:
+    mavenPomFile: 'pom.xml'
+    goals: 'validate'
+    options: '-B -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn'
+    publishJUnitResults: false
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.11'
+    mavenVersionOption: 'Default'
+    mavenAuthenticateFeed: false
+    effectivePomSkip: false
+    sonarQubeRunAnalysis: false
+    checkStyleRunAnalysis: false
+
+- task: Maven@3
+  displayName: 'Maven compile'
+  inputs:
+    mavenPomFile: 'pom.xml'
+    goals: 'compile'
+    options: '-B -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn'
+    publishJUnitResults: false
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.11'
+    mavenVersionOption: 'Default'
+    mavenAuthenticateFeed: false
+    effectivePomSkip: false
+    sonarQubeRunAnalysis: false
+    checkStyleRunAnalysis: false
+
+- task: Maven@3
+  displayName: 'Maven test'
+  inputs:
+    mavenPomFile: 'pom.xml'
+    goals: 'test'
+    options: '-B -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.11'
+    mavenVersionOption: 'Default'
+    mavenAuthenticateFeed: false
+    effectivePomSkip: false
+    sonarQubeRunAnalysis: false
+    checkStyleRunAnalysis: false
+
+
+- task: Maven@3
+  displayName: 'Maven package'
+  inputs:
+    mavenPomFile: 'pom.xml'
+    goals: 'package'
+    options: '-DskipTests -B -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn'
+    publishJUnitResults: false
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.11'
+    mavenVersionOption: 'Default'
+    mavenAuthenticateFeed: false
+    effectivePomSkip: false
+    sonarQubeRunAnalysis: false
+    checkStyleRunAnalysis: false
+    pmdRunAnalysis: false
