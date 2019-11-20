@@ -1,7 +1,6 @@
 package fr.bot.dohmabot.bot;
 
 import fr.bot.dohmabot.server.DTO.messageChannelDTO;
-import fr.bot.dohmabot.server.controllers.irc.selectIRCController;
 import org.jibble.pircbot.IrcException;
 import org.jibble.pircbot.NickAlreadyInUseException;
 import org.jibble.pircbot.PircBot;
@@ -18,7 +17,6 @@ import java.io.IOException;
 public class IRCBotImpl extends PircBot implements IRCBot {
 
     public static final String BOT_NAME = "DohMaBot";
-    private selectIRCController selectIRCController = new selectIRCController();
 
     /**
      * Constructor of IRCBotImpl
@@ -103,6 +101,5 @@ public class IRCBotImpl extends PircBot implements IRCBot {
                           final String hostname,
                           final String message){
         final messageChannelDTO messageChannel = new messageChannelDTO(channel, sender, login, hostname, message);
-        this.selectIRCController.facingController(messageChannel);
     };
 }
