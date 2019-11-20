@@ -1,5 +1,7 @@
 package fr.bot.dohmabot.bot;
 
+import fr.bot.dohmabot.server.DTO.messageChannelDTO;
+import fr.bot.dohmabot.server.controllers.irc.selectIRCController;
 import org.jibble.pircbot.IrcException;
 import org.jibble.pircbot.NickAlreadyInUseException;
 import org.jibble.pircbot.PircBot;
@@ -15,12 +17,15 @@ import java.io.IOException;
 @Service
 public class IRCBotImpl extends PircBot implements IRCBot {
 
+    public static final String BOT_NAME = "DohMaBot";
+    private selectIRCController selectIRCController = new selectIRCController();
+
     /**
      * Constructor of IRCBotImpl
      */
     public IRCBotImpl(){
         super();
-        this.setName("Dohmabot");
+        this.setName(BOT_NAME);
         this.isConnected();
         this.setVerbose(true);
     }
@@ -53,6 +58,21 @@ public class IRCBotImpl extends PircBot implements IRCBot {
     }
 
     /**
+     * Returns an array of all channels that we are in.
+     * Note that if you call this method immediately after joining a new channel,
+     * the new channel may not appear in this array as it is not possible
+     * to tell if the join was successful until a response is received from the IRC server.
+     * @return Array of String of channels
+     */
+    public String[] getChannel(){
+        String[] channels;
+
+        channels = super.getChannels();
+
+        return channels;
+    }
+
+    /**
      * Sends a message to a channel.
      * @param channel The name of the channel to send to.
      * @param message The message to send
@@ -67,4 +87,17 @@ public class IRCBotImpl extends PircBot implements IRCBot {
     public void disconnectToServer(){
         super.disconnect();
     }
+
+    /**
+     * This method is called whenever a message is sent to a channel
+     * @param channel The channel to which the message was sent
+     * @param sender The nick of the person who sent the message
+     * @param login The login of the person who sent the message
+     * @param hostname The hostname of the person who sent the message
+     * @param message The actual message sent to the channel
+     */
+    public void onMessage(String channel, String sender, String login, String hostname, String message){
+        messageChannelDTO messageChannel = new messageChannelDTO(channel, sender, login, hostname, message);
+        this.selectIRCController.facingController(messageChannel);
+    };
 }

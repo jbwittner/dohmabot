@@ -32,6 +32,15 @@ public interface IRCBot {
     void joinIRCChannel(final String channel);
 
     /**
+     * Returns an array of all channels that we are in.
+     * Note that if you call this method immediately after joining a new channel,
+     * the new channel may not appear in this array as it is not possible
+     * to tell if the join was successful until a response is received from the IRC server.
+     * @return Array of String of channels
+     */
+    String[] getChannel();
+
+    /**
      * Sends a message to a channel.
      * @param channel The name of the channel to send to.
      * @param message The message to send
@@ -42,4 +51,14 @@ public interface IRCBot {
      * This method disconnects from the server
      */
     void disconnectToServer();
+
+    /**
+     * This method is called whenever a message is sent to a channel
+     * @param channel The channel to which the message was sent
+     * @param sender The nick of the person who sent the message
+     * @param login The login of the person who sent the message
+     * @param hostname The hostname of the person who sent the message
+     * @param message The actual message sent to the channel
+     */
+    void onMessage(String channel, String sender, String login, String hostname, String message);
 }
