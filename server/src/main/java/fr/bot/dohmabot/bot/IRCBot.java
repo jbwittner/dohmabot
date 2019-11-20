@@ -35,7 +35,8 @@ public interface IRCBot {
      * Returns an array of all channels that we are in.
      * Note that if you call this method immediately after joining a new channel,
      * the new channel may not appear in this array as it is not possible
-     * to tell if the join was successful until a response is received from the IRC server.
+     * to tell if the join was successful until a response
+     * is received from the IRC server.
      * @return Array of String of channels
      */
     String[] getChannel();
@@ -60,5 +61,9 @@ public interface IRCBot {
      * @param hostname The hostname of the person who sent the message
      * @param message The actual message sent to the channel
      */
-    void onMessage(String channel, String sender, String login, String hostname, String message);
+    void onMessage(final String channel,
+                   final String sender,
+                   final String login,
+                   final String hostname,
+                   final String message);
 }

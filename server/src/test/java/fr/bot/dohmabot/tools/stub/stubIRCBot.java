@@ -1,4 +1,4 @@
-package fr.bot.dohmabot.tools.Stub;
+package fr.bot.dohmabot.tools.stub;
 
 import fr.bot.dohmabot.bot.IRCBotImpl;
 import org.jibble.pircbot.IrcException;
@@ -8,7 +8,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StubIRCBot extends IRCBotImpl {
+/**
+ * Stub of IRCBot
+ */
+public class stubIRCBot extends IRCBotImpl {
 
     public static final Integer TEST_PORT = 8080;
     public static final String TEST_TOKEN = "test_token";
@@ -80,8 +83,9 @@ public class StubIRCBot extends IRCBotImpl {
      * Returns an array of all channels that we are in.
      * Note that if you call this method immediately after joining a new channel,
      * the new channel may not appear in this array as it is not possible
-     * to tell if the join was successful until a response is received from the IRC server.
-     * @return
+     * to tell if the join was successful until a response
+     * is received from the IRC server.
+     * @return Array of String of channels
      */
     public String[] getChannel(){
 
@@ -90,34 +94,6 @@ public class StubIRCBot extends IRCBotImpl {
         channels = this.listOfChannels.toArray(new String[0]);
 
         return channels;
-    }
-
-    /**
-     * Sends a message to a channel.
-     * @param channel The name of the channel to send to.
-     * @param message The message to send
-     */
-    public void sendIRCMessage(final String channel, final String message){
-        // do nothing
-    }
-
-    /**
-     * This method disconnects from the server
-     */
-    public void disconnectToServer(){
-        // do nothing
-    }
-
-    /**
-     * This method is called whenever a message is sent to a channel
-     * @param channel The channel to which the message was sent
-     * @param sender The nick of the person who sent the message
-     * @param login The login of the person who sent the message
-     * @param hostname The hostname of the person who sent the message
-     * @param message The actual message sent to the channel
-     */
-    public void onMessage(String channel, String sender, String login, String hostname, String message){
-        // do nothing
     }
 
 }

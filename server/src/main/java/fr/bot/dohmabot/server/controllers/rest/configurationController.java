@@ -1,16 +1,12 @@
 package fr.bot.dohmabot.server.controllers.rest;
 
 import fr.bot.dohmabot.bot.IRCBot;
-import fr.bot.dohmabot.service.bookmaker.bookmaker;
 import org.jibble.pircbot.IrcException;
 import org.jibble.pircbot.NickAlreadyInUseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.annotation.Resource;
 import java.io.IOException;
-import java.util.List;
 
 /**
  * Controller to configure the bot
@@ -21,8 +17,12 @@ public class configurationController {
 
     private IRCBot ircBot;
 
+    /**
+     * Constructor of the controller
+     * @param ircBot Instance of the bot
+     */
     @Autowired
-    public configurationController(IRCBot ircBot){
+    public configurationController(final IRCBot ircBot){
         this.ircBot = ircBot;
     }
 
