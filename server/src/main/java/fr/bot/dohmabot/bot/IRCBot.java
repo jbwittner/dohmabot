@@ -61,9 +61,11 @@ public interface IRCBot {
      * @param hostname The hostname of the person who sent the message
      * @param message The actual message sent to the channel
      */
+    /*
     void onMessage(final String channel,
                    final String sender,
                    final String login,
                    final String hostname,
                    final String message);
+     */
 }

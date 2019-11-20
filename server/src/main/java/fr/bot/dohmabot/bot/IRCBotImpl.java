@@ -1,6 +1,5 @@
 package fr.bot.dohmabot.bot;
 
-import fr.bot.dohmabot.server.DTO.messageChannelDTO;
 import org.jibble.pircbot.IrcException;
 import org.jibble.pircbot.NickAlreadyInUseException;
 import org.jibble.pircbot.PircBot;
@@ -39,6 +38,7 @@ public class IRCBotImpl extends PircBot implements IRCBot {
      * @throws IrcException if the server would not let us join it
      * @throws NickAlreadyInUseException if our nick is already in use on the server.
      */
+    @Override
     public boolean connectToServer(final String uri, final Integer port, final String token)
             throws IOException, IrcException, NickAlreadyInUseException {
         boolean isConnected;
@@ -51,6 +51,7 @@ public class IRCBotImpl extends PircBot implements IRCBot {
      * Joins a channel
      * @param channel The name of the channel to join
      */
+    @Override
     public void joinIRCChannel(final String channel){
         this.joinChannel(channel);
     }
@@ -63,6 +64,7 @@ public class IRCBotImpl extends PircBot implements IRCBot {
      * is received from the IRC server.
      * @return Array of String of channels
      */
+    @Override
     public String[] getChannel(){
         String[] channels;
 
@@ -76,6 +78,7 @@ public class IRCBotImpl extends PircBot implements IRCBot {
      * @param channel The name of the channel to send to.
      * @param message The message to send
      */
+    @Override
     public void sendIRCMessage(final String channel, final String message){
         this.sendMessage(channel, message);
     }
@@ -83,6 +86,7 @@ public class IRCBotImpl extends PircBot implements IRCBot {
     /**
      * This method disconnects from the server
      */
+    @Override
     public void disconnectToServer(){
         super.disconnect();
     }
@@ -95,11 +99,12 @@ public class IRCBotImpl extends PircBot implements IRCBot {
      * @param hostname The hostname of the person who sent the message
      * @param message The actual message sent to the channel
      */
+    /*
     public void onMessage(final String channel,
                           final String sender,
                           final String login,
                           final String hostname,
                           final String message){
-        final messageChannelDTO messageChannel = new messageChannelDTO(channel, sender, login, hostname, message);
     };
+    */
 }
