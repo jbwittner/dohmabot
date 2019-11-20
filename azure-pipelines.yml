@@ -101,7 +101,6 @@ steps:
     options: '-B -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn'
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    codeCoverageToolOption: 'JaCoCo'
     javaHomeOption: 'JDKVersion'
     jdkVersionOption: '1.11'
     mavenVersionOption: 'Default'
@@ -109,6 +108,13 @@ steps:
     effectivePomSkip: false
     sonarQubeRunAnalysis: false
 
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      curl -Ls -o codacy-coverage-reporter "$(curl -Ls https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest | jq -r '.assets | map({name, browser_download_url} | select(.name | contains("codacy-coverage-reporter-linux"))) | .[0].browser_download_url')"
+      chmod +x codacy-coverage-reporter
+      ./codacy-coverage-reporter report -l Java -r server/target/site/jacoco/jacoco.xml
 
 - task: Maven@3
   displayName: 'Maven package'
