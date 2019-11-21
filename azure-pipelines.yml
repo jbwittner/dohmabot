@@ -3,7 +3,12 @@
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
 
-trigger: none
+trigger:
+  branches:
+    include:
+    - master
+    - develop
+
 
 pr:
 - master
@@ -11,6 +16,9 @@ pr:
 
 pool:
   vmImage: 'ubuntu-latest'
+
+variables:
+- group: Simple variable group
 
 steps:
 - task: DownloadSecureFile@1
@@ -107,8 +115,13 @@ steps:
     mavenAuthenticateFeed: false
     effectivePomSkip: false
     sonarQubeRunAnalysis: false
-    checkStyleRunAnalysis: false
 
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      export CODECOV_TOKEN=$(CODECOV_TOKEN)
+      bash <(curl -s https://codecov.io/bash)
 
 - task: Maven@3
   displayName: 'Maven package'

@@ -15,14 +15,17 @@ import java.io.IOException;
 @Service
 public class IRCBotImpl extends PircBot implements IRCBot {
 
+    public static final String BOT_NAME = "DohMaBot";
+
     /**
      * Constructor of IRCBotImpl
      */
     public IRCBotImpl(){
         super();
-        this.setName("Dohmabot");
+        this.setName(BOT_NAME);
         this.isConnected();
         this.setVerbose(true);
+
     }
 
     /**
@@ -36,20 +39,40 @@ public class IRCBotImpl extends PircBot implements IRCBot {
      * @throws IrcException if the server would not let us join it
      * @throws NickAlreadyInUseException if our nick is already in use on the server.
      */
+    @Override
     public boolean connectToServer(final String uri, final Integer port, final String token)
             throws IOException, IrcException, NickAlreadyInUseException {
         boolean isConnected;
         this.connect(uri, port, token);
         isConnected = this.isConnected();
         return isConnected;
+        
     }
 
     /**
      * Joins a channel
      * @param channel The name of the channel to join
      */
+    @Override
     public void joinIRCChannel(final String channel){
         this.joinChannel(channel);
+    }
+
+    /**
+     * Returns an array of all channels that we are in.
+     * Note that if you call this method immediately after joining a new channel,
+     * the new channel may not appear in this array as it is not possible
+     * to tell if the join was successful until a response
+     * is received from the IRC server.
+     * @return Array of String of channels
+     */
+    @Override
+    public String[] getChannel(){
+        String[] channels;
+
+        channels = super.getChannels();
+
+        return channels;
     }
 
     /**
@@ -57,6 +80,7 @@ public class IRCBotImpl extends PircBot implements IRCBot {
      * @param channel The name of the channel to send to.
      * @param message The message to send
      */
+    @Override
     public void sendIRCMessage(final String channel, final String message){
         this.sendMessage(channel, message);
     }
@@ -64,7 +88,25 @@ public class IRCBotImpl extends PircBot implements IRCBot {
     /**
      * This method disconnects from the server
      */
+    @Override
     public void disconnectToServer(){
         super.disconnect();
     }
+
+    /**
+     * This method is called whenever a message is sent to a channel
+     * @param channel The channel to which the message was sent
+     * @param sender The nick of the person who sent the message
+     * @param login The login of the person who sent the message
+     * @param hostname The hostname of the person who sent the message
+     * @param message The actual message sent to the channel
+     */
+    /*
+    public void onMessage(final String channel,
+                          final String sender,
+                          final String login,
+                          final String hostname,
+                          final String message){
+    };
+    */
 }

@@ -1,12 +1,11 @@
-package fr.bot.dohmabot.server.controllers;
+package fr.bot.dohmabot.server.controllers.rest;
 
 import fr.bot.dohmabot.bot.IRCBot;
 import org.jibble.pircbot.IrcException;
 import org.jibble.pircbot.NickAlreadyInUseException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.annotation.Resource;
 import java.io.IOException;
 
 /**
@@ -14,10 +13,18 @@ import java.io.IOException;
  * @author Jean-Baptiste WITTNER
  */
 @RestController
-public class ConfigurationController {
+public class configurationController {
 
-    @Resource
     private IRCBot ircBot;
+
+    /**
+     * Constructor of the controller
+     * @param ircBot Instance of the bot
+     */
+    @Autowired
+    public configurationController(final IRCBot ircBot){
+        this.ircBot = ircBot;
+    }
 
     /**
      * Request to set the Bot connection
@@ -48,6 +55,15 @@ public class ConfigurationController {
     }
 
     /**
+     * Request to get all channel where the bot are connected
+     */
+    @RequestMapping("/getChannel")
+    public String[] getChannel(){
+        return this.ircBot.getChannel();
+    }
+
+
+    /**
      * Request for send a message with the bot on a channel
      * @param channel The name of the channel to send a message
      * @param message Message to send
@@ -57,4 +73,13 @@ public class ConfigurationController {
         final String channelToSendMessage = "#" + channel;
         this.ircBot.sendIRCMessage(channelToSendMessage, message);
     }
+
+    /**
+     * Request to disconnect the bot.
+     */
+    @RequestMapping("/disconnect")
+    public void disconnect(){
+        this.ircBot.disconnectToServer();
+    }
+
 }
