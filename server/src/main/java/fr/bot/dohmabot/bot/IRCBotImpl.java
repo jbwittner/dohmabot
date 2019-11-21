@@ -25,7 +25,6 @@ public class IRCBotImpl extends PircBot implements IRCBot {
         this.setName(BOT_NAME);
         this.isConnected();
         this.setVerbose(true);
-
     }
 
     /**
@@ -46,7 +45,6 @@ public class IRCBotImpl extends PircBot implements IRCBot {
         this.connect(uri, port, token);
         isConnected = this.isConnected();
         return isConnected;
-        
     }
 
     /**
