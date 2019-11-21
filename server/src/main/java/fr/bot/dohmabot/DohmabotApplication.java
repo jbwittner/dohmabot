@@ -15,9 +15,7 @@ public class DohmabotApplication {
 	 * @param args Some args
 	 */
 	public static void main(final String[] args) {
-
 		SpringApplication.run(DohmabotApplication.class, args);
-		
 	}
 
 }
