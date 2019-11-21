@@ -117,9 +117,8 @@ steps:
     script: |
       ./config.cmd --sslskipcertvalidation
       export CODACY_PROJECT_TOKEN=$(CODACY_PROJECT_TOKEN)
-      curl -Ls -o codacy-coverage-reporter "$(curl -Ls https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest | jq -r '.assets | map({name, browser_download_url} | select(.name | contains("codacy-coverage-reporter-linux"))) | .[0].browser_download_url')"
-      chmod +x codacy-coverage-reporter
-      ./codacy-coverage-reporter report -l Java -r server/target/site/jacoco/jacoco.xml
+      curl -Ls -o codacy-coverage-reporter-assembly.jar $(curl -Ls https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest | jq -r '.assets | map({content_type, browser_download_url} | select(.content_type | contains("java-archive"))) | .[0].browser_download_url')
+      java -Dhttps.protocols=TLSv1.2,TLSv1.1,TLSv1 -jar codacy-coverage-reporter-assembly.jar report -l Java -r server/target/site/jacoco/jacoco.xml
 
 - task: Maven@3
   displayName: 'Maven package'
