@@ -4,6 +4,7 @@ import org.jibble.pircbot.IrcException;
 import org.jibble.pircbot.NickAlreadyInUseException;
 import org.jibble.pircbot.PircBot;
 import org.springframework.stereotype.Service;
+import fr.bot.dohmabot.server.controllers.selectIRCController;
 
 import java.io.IOException;
 
@@ -16,6 +17,8 @@ import java.io.IOException;
 public class IRCBotImpl extends PircBot implements IRCBot {
 
     public static final String BOT_NAME = "DohMaBot";
+
+    private selectIRCController selectController = new selectIRCController();
 
     /**
      * Constructor of IRCBotImpl
@@ -101,12 +104,15 @@ public class IRCBotImpl extends PircBot implements IRCBot {
      * @param hostname The hostname of the person who sent the message
      * @param message The actual message sent to the channel
      */
-    /*
     public void onMessage(final String channel,
                           final String sender,
                           final String login,
                           final String hostname,
                           final String message){
+
+        final IRCMessage ircMessage = new IRCMessage(channel, sender, login, hostname, message);
+
+        this.selectController.selectController(ircMessage);
     };
-    */
+
 }
