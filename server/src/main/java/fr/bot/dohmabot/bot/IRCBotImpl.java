@@ -104,6 +104,7 @@ public class IRCBotImpl extends PircBot implements IRCBot {
      * @param hostname The hostname of the person who sent the message
      * @param message The actual message sent to the channel
      */
+    @Override
     public void onMessage(final String channel,
                           final String sender,
                           final String login,

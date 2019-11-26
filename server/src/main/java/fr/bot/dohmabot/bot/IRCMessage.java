@@ -52,4 +52,8 @@ public class IRCMessage {
     public String getMessage() {
         return message;
     }
+
+    public void setMessage(final String message) {
+        this.message = message;
+    }
 }

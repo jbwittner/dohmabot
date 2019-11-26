@@ -29,15 +29,25 @@ public class selectIRCController {
 
     }
 
-    private boolean isCommand(final IRCMessage ircMessage){
+    /**
+     * Methode to check if the IRC message is a command (!command)
+     * @param ircMessage Message to check
+     * @return True if the message is a command else False
+     */
+    private Boolean isCommand(final IRCMessage ircMessage){
         boolean result = false;
         final String message = ircMessage.getMessage();
 
-        result = Pattern.matches(this.pattern, message);
+        result = Pattern.compile(this.pattern).matcher(message).find();
 
         return result;
     }
 
+    /**
+     * Methode to extract the command on the message
+     * @param ircMessage Input message
+     * @return Command extracted
+     */
     private String extractCommand(final IRCMessage ircMessage){
         final String message = ircMessage.getMessage();
         final Pattern pattern = Pattern.compile(this.pattern);
@@ -53,6 +63,11 @@ public class selectIRCController {
 
     }
 
+    /**
+     * Methode to select the IRC controller
+     * @param command Command extract of the message
+     * @param ircMessage Input message
+     */
     private void switchCommand(final String command,final IRCMessage ircMessage){
 
         ircMessage.getChannel();
