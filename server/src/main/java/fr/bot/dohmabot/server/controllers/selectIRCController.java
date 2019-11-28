@@ -10,22 +10,25 @@ import java.util.regex.Pattern;
  */
 public class selectIRCController {
 
-    private final String pattern = "[!][a-z]+";
+    private final String pattern = "^[!][a-zA-Z0-9]+";
 
     /**
      * Methode to check and select the controller in function of the command
      * @param ircMessage Input message
      */
-    public void selectController(final IRCMessage ircMessage){
+    public boolean selectController(final IRCMessage ircMessage){
         boolean isCommand;
+        boolean result = false;
         String command;
 
         isCommand = this.isCommand(ircMessage);
 
         if(isCommand == true){
             command = this.extractCommand(ircMessage);
-            this.switchCommand(command, ircMessage);
+            result = this.switchCommand(command, ircMessage);
         }
+
+        return result;
 
     }
 
@@ -67,15 +70,19 @@ public class selectIRCController {
      * Methode to select the IRC controller
      * @param command Command extract of the message
      * @param ircMessage Input message
+     * @return True if the command match
      */
-    private void switchCommand(final String command,final IRCMessage ircMessage){
+    private boolean switchCommand(final String command, final IRCMessage ircMessage){
 
+        boolean result = false;
         ircMessage.getChannel();
 
         switch (command){
             default:
-                // Do nothing
+                result = true;
         }
+
+        return result;
 
     }
 
