@@ -1,22 +1,22 @@
 package fr.bot.dohmabot.tests.controllers.selectirccontroller.selectcontroller;
 
 import fr.bot.dohmabot.bot.IRCMessage;
+import fr.bot.dohmabot.server.controllers.selectIRCController;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import fr.bot.dohmabot.server.controllers.selectIRCController;
 
-public class isCommandTest extends selectIRCControllerTest {
+public class selectControllerTest extends selectIRCControllerTest {
 
-    private final String commandName = "isCommand";
+    private final String commandName = "selectController";
 
     /**
      * Test to check the answer when the inputs are ok
      */
     @Test
-    public void isCommandOk() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    public void selectControllerOk() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         boolean result;
         final Method method = selectIRCController.class.getDeclaredMethod(this.commandName, IRCMessage.class);
 
@@ -34,7 +34,7 @@ public class isCommandTest extends selectIRCControllerTest {
      * Test to check the answer when the inputs are ok
      */
     @Test
-    public void isCommandFail() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    public void selectControllerFail() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         boolean result;
         final Method method = selectIRCController.class.getDeclaredMethod(this.commandName, IRCMessage.class);
 
@@ -52,7 +52,7 @@ public class isCommandTest extends selectIRCControllerTest {
      * Test to check the answer when the inputs are ok
      */
     @Test
-    public void isCommandMultipleCommand() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    public void selectControllerMultipleCommand() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         boolean result;
         final Method method = selectIRCController.class.getDeclaredMethod(this.commandName, IRCMessage.class);
 
@@ -70,7 +70,7 @@ public class isCommandTest extends selectIRCControllerTest {
      * Test to check the answer when the inputs are ok
      */
     @Test
-    public void isCommandArguments() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    public void selectControllerArguments() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         boolean result;
         final Method method = selectIRCController.class.getDeclaredMethod(this.commandName, IRCMessage.class);
 
@@ -88,7 +88,7 @@ public class isCommandTest extends selectIRCControllerTest {
      * Test to check the answer when the inputs are ok
      */
     @Test
-    public void isCommandStringAndCommand() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    public void selectControllerStringAndCommand() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         boolean result;
         final Method method = selectIRCController.class.getDeclaredMethod(this.commandName, IRCMessage.class);
 
