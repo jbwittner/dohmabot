@@ -8,6 +8,9 @@ import org.junit.jupiter.api.Test;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+/**
+ * A JUnit test case testing the extractCommand of selectIRCController.
+ */
 public class extractCommandTest extends selectIRCControllerTest {
 
     private final String commandName = "extractCommand";
@@ -37,7 +40,7 @@ public class extractCommandTest extends selectIRCControllerTest {
     }
 
     /**
-     * Test to check the answer when the inputs are ok
+     * Test to check the answer when the inputs are not ok
      */
     @Test
     public void extractCommandFail() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
@@ -55,7 +58,7 @@ public class extractCommandTest extends selectIRCControllerTest {
     }
 
     /**
-     * Test to check the answer when the inputs are ok
+     * Test to check the answer when the inputs have many commands
      */
     @Test
     public void extractCommandMultipleCommand() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
@@ -73,7 +76,7 @@ public class extractCommandTest extends selectIRCControllerTest {
     }
 
     /**
-     * Test to check the answer when the inputs are ok
+     * Test to check the answer when the inputs have arguments with the command
      */
     @Test
     public void extractCommandArguments() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
@@ -91,7 +94,7 @@ public class extractCommandTest extends selectIRCControllerTest {
     }
 
     /**
-     * Test to check the answer when the inputs are ok
+     * Test to check the answer when the inputs have a string before the command
      */
     @Test
     public void extractCommandStringAndCommand() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {

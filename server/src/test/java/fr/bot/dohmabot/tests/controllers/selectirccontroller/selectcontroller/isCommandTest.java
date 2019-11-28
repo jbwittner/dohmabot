@@ -8,6 +8,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import fr.bot.dohmabot.server.controllers.selectIRCController;
 
+/**
+ * A JUnit test case testing the isCommand of selectIRCController.
+ */
 public class isCommandTest extends selectIRCControllerTest {
 
     private final String commandName = "isCommand";
@@ -31,7 +34,7 @@ public class isCommandTest extends selectIRCControllerTest {
     }
 
     /**
-     * Test to check the answer when the inputs are ok
+     * Test to check the answer when the inputs are not ok
      */
     @Test
     public void isCommandFail() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
@@ -49,7 +52,7 @@ public class isCommandTest extends selectIRCControllerTest {
     }
 
     /**
-     * Test to check the answer when the inputs are ok
+     * Test to check the answer when the inputs have many commands
      */
     @Test
     public void isCommandMultipleCommand() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
@@ -67,7 +70,7 @@ public class isCommandTest extends selectIRCControllerTest {
     }
 
     /**
-     * Test to check the answer when the inputs are ok
+     * Test to check the answer when the inputs have arguments with the command
      */
     @Test
     public void isCommandArguments() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
@@ -85,7 +88,7 @@ public class isCommandTest extends selectIRCControllerTest {
     }
 
     /**
-     * Test to check the answer when the inputs are ok
+     * Test to check the answer when the inputs have a string before the command
      */
     @Test
     public void isCommandStringAndCommand() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {

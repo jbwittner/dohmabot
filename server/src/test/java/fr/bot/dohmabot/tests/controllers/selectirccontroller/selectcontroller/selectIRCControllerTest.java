@@ -4,6 +4,9 @@ import fr.bot.dohmabot.bot.IRCMessage;
 import fr.bot.dohmabot.server.controllers.selectIRCController;
 import org.junit.jupiter.api.BeforeEach;
 
+/**
+ * Mother class of configuration tests
+ */
 public class selectIRCControllerTest {
 
     public selectIRCController selectController;

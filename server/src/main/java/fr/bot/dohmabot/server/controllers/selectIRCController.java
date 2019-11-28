@@ -80,6 +80,7 @@ public class selectIRCController {
         switch (command){
             default:
                 result = true;
+                break;
         }
 
         return result;

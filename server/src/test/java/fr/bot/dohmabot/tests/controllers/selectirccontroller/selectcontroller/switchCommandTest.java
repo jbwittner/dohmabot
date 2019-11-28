@@ -8,6 +8,9 @@ import org.junit.jupiter.api.Test;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+/**
+ * A JUnit test case testing the switchCommand of selectIRCController.
+ */
 public class switchCommandTest extends selectIRCControllerTest {
 
     private final String commandName = "switchCommand";

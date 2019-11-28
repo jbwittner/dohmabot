@@ -8,6 +8,9 @@ import org.junit.jupiter.api.Test;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+/**
+ * A JUnit test case testing the selectController of selectIRCController.
+ */
 public class selectControllerTest extends selectIRCControllerTest {
 
     private final String commandName = "selectController";
@@ -31,7 +34,7 @@ public class selectControllerTest extends selectIRCControllerTest {
     }
 
     /**
-     * Test to check the answer when the inputs are ok
+     * Test to check the answer when the inputs are not ok
      */
     @Test
     public void selectControllerFail() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
@@ -49,7 +52,7 @@ public class selectControllerTest extends selectIRCControllerTest {
     }
 
     /**
-     * Test to check the answer when the inputs are ok
+     * Test to check the answer when the inputs have many commands
      */
     @Test
     public void selectControllerMultipleCommand() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
@@ -67,7 +70,7 @@ public class selectControllerTest extends selectIRCControllerTest {
     }
 
     /**
-     * Test to check the answer when the inputs are ok
+     * Test to check the answer when the inputs have arguments with the command
      */
     @Test
     public void selectControllerArguments() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
@@ -85,7 +88,7 @@ public class selectControllerTest extends selectIRCControllerTest {
     }
 
     /**
-     * Test to check the answer when the inputs are ok
+     * Test to check the answer when the inputs have a string before the command
      */
     @Test
     public void selectControllerStringAndCommand() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
