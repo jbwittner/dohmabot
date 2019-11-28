@@ -1,0 +1,36 @@
+package fr.bot.dohmabot.tests.controllers.selectirccontroller.selectcontroller;
+
+import fr.bot.dohmabot.bot.IRCMessage;
+import fr.bot.dohmabot.server.controllers.selectIRCController;
+import org.junit.jupiter.api.BeforeEach;
+
+/**
+ * Mother class of configuration tests
+ */
+public class selectIRCControllerTest {
+
+    public selectIRCController selectController;
+    public IRCMessage inputIRCMessage;
+
+    private final String channel = "TestChannel";
+    private final String sender = "TestSender";
+    private final String login = "TestLogin";
+    private final String hostname = "TestHostnmae";
+    private final String message = "TestMessage";
+
+    protected final String commandOk = "!testcommandOk";
+    protected final String commandFail = "testcommandFail";
+    protected final String multipleCommand = "!testcommand1 !testcommand2";
+    protected final String commandAndArgument = "!testcommand argument";
+    protected final String stringAndCommand = "String !command";
+
+    /**
+     * Setup of each configuration tests
+     */
+    @BeforeEach
+    public void setUp() {
+        this.selectController = new selectIRCController();
+        this.inputIRCMessage = new IRCMessage(this.channel, this.sender, this.login, this.hostname, this.message);
+    }
+
+}
