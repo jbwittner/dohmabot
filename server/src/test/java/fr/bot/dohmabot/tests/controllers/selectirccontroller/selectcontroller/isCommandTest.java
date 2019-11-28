@@ -10,6 +10,8 @@ import fr.bot.dohmabot.server.controllers.selectIRCController;
 
 public class isCommandTest extends selectControllerTest{
 
+    private final String commandName = "isCommand";
+
     /**
      * Test to check the answer when the inputs are ok
      */
@@ -79,6 +81,24 @@ public class isCommandTest extends selectControllerTest{
         result = (boolean) method.invoke(this.selectController, this.inputIRCMessage);
 
         Assertions.assertTrue(result);
+
+    }
+
+    /**
+     * Test to check the answer when the inputs are ok
+     */
+    @Test
+    public void isCommandStringAndCommand() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        boolean result;
+        final Method method = selectIRCController.class.getDeclaredMethod(this.commandName, IRCMessage.class);
+
+        method.setAccessible(true);
+
+        this.inputIRCMessage.setMessage(this.stringAndCommand);
+
+        result = (boolean) method.invoke(this.selectController, this.inputIRCMessage);
+
+        Assertions.assertFalse(result);
 
     }
 }

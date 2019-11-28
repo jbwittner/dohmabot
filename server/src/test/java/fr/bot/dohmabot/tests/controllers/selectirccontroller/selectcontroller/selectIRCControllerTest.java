@@ -15,11 +15,11 @@ public class selectControllerTest {
     private final String hostname = "TestHostnmae";
     private final String message = "TestMessage";
 
-    protected final String commandName = "isCommand";
     protected final String commandOk = "!testcommandOk";
     protected final String commandFail = "testcommandFail";
     protected final String multipleCommand = "!testcommand1 !testcommand2";
     protected final String commandAndArgument = "!testcommand argument";
+    protected final String stringAndCommand = "String !command";
 
     /**
      * Setup of each configuration tests
